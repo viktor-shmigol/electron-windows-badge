@@ -1,0 +1,24 @@
+{
+  "name": "electron-windows-badge",
+  "version": "1.0.0",
+  "description": "Electron Windows Badge plugin to access and modify the badge number of the app icon in windows.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/viktor-shmigol/electron-windows-badge.git"
+  },
+  "keywords": [
+    "electron",
+    "windows",
+    "badge"
+  ],
+  "author": "Viktor Shmigol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viktor-shmigol/electron-windows-badge/issues"
+  },
+  "homepage": "https://github.com/viktor-shmigol/electron-windows-badge#readme"
+}
