@@ -14,7 +14,7 @@ module.exports = class BadgeGenerator {
     this.win.webContents.executeJavaScript(`window.drawBadge = function ${this.drawBadge}`);
   }
 
-  genarate(number) {
+  generate(number) {
     const opts = JSON.stringify(this.style);
     return this.win.webContents.executeJavaScript(`window.drawBadge(${number}, ${opts});`);
   }
