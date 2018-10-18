@@ -39,3 +39,7 @@ Electron Windows Badge plugin to access and modify the badge number of the app i
 | `fit`             	| true     			| Be sure that your number will be fit into badge|
 | `decimals `         	| 0					| Numbers after dot (For float numbers) |
 | `radius`            	| 8       			| The radius of badge |
+
+## License
+
+[MIT](LICENSE)
