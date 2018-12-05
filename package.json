@@ -1,6 +1,6 @@
 {
   "name": "electron-windows-badge",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Electron Windows Badge plugin to access and modify the badge number of the app icon in windows.",
   "main": "index.js",
   "scripts": {

@@ -11,12 +11,11 @@ module.exports = class BadgeGenerator {
     };
     this.win = win;
     this.style = Object.assign(defaultStyle, opts);
-    this.win.webContents.executeJavaScript(`window.drawBadge = function ${this.drawBadge}`);
   }
 
   generate(number) {
     const opts = JSON.stringify(this.style);
-    return this.win.webContents.executeJavaScript(`window.drawBadge(${number}, ${opts});`);
+    return this.win.webContents.executeJavaScript(`window.drawBadge = function ${this.drawBadge}; window.drawBadge(${number}, ${opts});`);
   }
 
   drawBadge(number, style) {
