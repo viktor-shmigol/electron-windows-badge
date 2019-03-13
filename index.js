@@ -9,6 +9,7 @@ module.exports = class Badge {
     this.opts = opts;
     this.generator = new BadgeGenerator(win, opts);
     this.initListeners();
+    this.win.on('close', () => { this.win = null; });
   }
 
   update(badgeNumber) {
@@ -24,7 +25,9 @@ module.exports = class Badge {
 
   initListeners() {
     ipcMain.on(UPDATE_BADGE_EVENT, (event, badgeNumber) => {
-      this.update(badgeNumber);
+      if (this.win) {
+        this.update(badgeNumber);
+      }
       event.returnValue = 'success';
     });
   }
