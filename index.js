@@ -9,7 +9,7 @@ module.exports = class Badge {
     this.opts = opts;
     this.generator = new BadgeGenerator(win, opts);
     this.initListeners();
-    this.win.on('close', () => { this.win = null; });
+    this.win.on('closed', () => { this.win = null; });
   }
 
   update(badgeNumber) {
