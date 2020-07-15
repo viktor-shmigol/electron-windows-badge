@@ -2,6 +2,7 @@ const { nativeImage, ipcMain } = require('electron');
 const BadgeGenerator = require('./badge_generator.js');
 const badgeDescription = 'New notification';
 const UPDATE_BADGE_EVENT = 'update-badge';
+let currentOverlayIcon = { image: null, badgeDescription };
 
 module.exports = class Badge {
   constructor(win, opts = {}) {
@@ -9,17 +10,26 @@ module.exports = class Badge {
     this.opts = opts;
     this.generator = new BadgeGenerator(win, opts);
     this.initListeners();
-    this.win.on('close', () => { this.win = null; });
+    this.win.on('closed', () => { this.win = null; });
+    this.win.on('show', () => { this.win.setOverlayIcon(currentOverlayIcon.image, currentOverlayIcon.badgeDescription); });
   }
 
   update(badgeNumber) {
     if (badgeNumber) {
       this.generator.generate(badgeNumber).then((base64) => {
-        const image =  nativeImage.createFromDataURL(base64);
-        this.win.setOverlayIcon(image, badgeDescription);
+        const image = nativeImage.createFromDataURL(base64);
+        currentOverlayIcon = {
+          image,
+          badgeDescription
+        }
+        this.win.setOverlayIcon(currentOverlayIcon.image, currentOverlayIcon.badgeDescription);
       });
     } else {
-      this.win.setOverlayIcon(null, badgeDescription);
+      currentOverlayIcon = {
+        image: null,
+        badgeDescription
+      }
+      this.win.setOverlayIcon(currentOverlayIcon.image, currentOverlayIcon.badgeDescription);
     }
   }
 
