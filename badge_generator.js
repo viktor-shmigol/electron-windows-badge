@@ -72,6 +72,14 @@ module.exports = class BadgeGenerator {
     }
 
     img.draw();
-    return img.toDataURL();
+
+    // Create a blank 16x16 transparent canvas so that the badge doesn't stretch.
+    var blankCanvas = document.createElement('canvas');
+    blankCanvas.width = 16;
+    blankCanvas.height = 16;
+    var ctx = blankCanvas.getContext('2d');
+    ctx.drawImage(img, 16 - img.width, 16 - img.height)
+
+    return blankCanvas.toDataURL();
   }
 }
