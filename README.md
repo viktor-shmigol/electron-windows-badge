@@ -26,6 +26,25 @@ Electron Windows Badge plugin to access and modify the badge number of the app i
 
     4) To remove badge just call this(you must do it in render process):
         ipcRenderer.sendSync('update-badge', null);
+#### Usage on Main Process
+    1) Require electron-windows-badge in your main process:
+        const Badge = require('electron-windows-badge');
+
+    2) Initialize new object of badge while creating window:
+        function createWindow () {
+            win = new BrowserWindow({width: 800, height: 600});
+            const badgeOptions = {}
+            const winBadge = new Badge(win, badgeOptions);
+            setupWinBadge(win, winBadge);
+        }
+        function setupWinBadge(win, winBadge) {
+            win.on('page-title-updated', (event, title) => {
+                // consider getCounterValue as a method that gets
+                // the number of notifications from the title, eg: (2) My App.
+                const counter = getCounterValue(title);
+                winBadge.update(counter);
+            });
+        }
 
 ## API
 
